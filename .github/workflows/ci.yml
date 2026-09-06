@@ -22,3 +22,6 @@ jobs:
 
       - name: Check hello file
         run: test -f hello.txt
+
+      - name: Test login feature
+        run: grep -q "Login feature started" hello.txt
