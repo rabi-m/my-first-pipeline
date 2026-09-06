@@ -21,4 +21,4 @@ jobs:
         run: ls -la
 
       - name: Check hello file
-        run: test -f hello.txt
+        run: test -f dose-not-exist.txt
