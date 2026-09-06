@@ -19,3 +19,6 @@ jobs:
 
       - name: List files
         run: ls -la
+
+      - name: Check hello file
+        run: test -f hello.txt
