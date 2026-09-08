@@ -4,6 +4,7 @@ on:
   pull_request:
 
 jobs:
+
   test:
     runs-on: ubuntu-latest
 
@@ -14,14 +15,19 @@ jobs:
       - name: Say Hello
         run: echo "Hello from my first CI pipeline!"
 
-      - name: Show current directory
-        run: pwd
-
-      - name: List files
-        run: ls -la
-
       - name: Check hello file
         run: test -f hello.txt
 
       - name: Test login feature
         run: grep -q "Login feature started" hello.txt
+
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build simulation
+        run: echo "Building application..."
