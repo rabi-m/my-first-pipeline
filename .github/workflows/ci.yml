@@ -1,0 +1,33 @@
+name: My First CI
+
+on:
+  pull_request:
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Say Hello
+        run: echo "Hello from my first CI pipeline!"
+
+      - name: Check hello file
+        run: test -f hello.txt
+
+      - name: Test login feature
+        run: grep -q "Login feature started" hello.txt
+
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build simulation
+        run: echo "Building application..."
