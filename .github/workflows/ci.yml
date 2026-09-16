@@ -1,34 +1,35 @@
-name: My First CI
+
+name: Artifact Training
 
 on:
   pull_request:
 
 jobs:
-
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Create test result file
+        run: echo "Tests passed successfully" > test-result.txt
 
-      - name: Say Hello
-        run: echo "Hello from my first CI pipeline!"
+      - name: Show created file
+        run: cat test-result.txt
 
-      - name: Check hello file
-        run: test -f hello.txt
-
-      - name: Test login feature
-        run: grep -q "Login feature started" hello.txt
-
+      - name: Upload test result
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-result
+          path: test-result.txt
 
   build:
     needs: test
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Download test result
+        uses: actions/download-artifact@v4
+        with:
+          name: test-result
 
-      - name: Build simulation
-        run: echo "Building application..."
+      - name: Read test result
+        run: cat test-result.txt
