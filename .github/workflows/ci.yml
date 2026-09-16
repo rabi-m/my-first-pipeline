@@ -1,0 +1,35 @@
+
+name: Artifact Training
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create test result file
+        run: echo "Tests passed successfully" > test-result.txt
+
+      - name: Show created file
+        run: cat test-result.txt
+
+      - name: Upload test result
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-result
+          path: test-result.txt
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download test result
+        uses: actions/download-artifact@v4
+        with:
+          name: test-result
+
+      - name: Read test result
+        run: cat test-result.txt
